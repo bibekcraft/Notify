@@ -1,5 +1,6 @@
 package com.example.notes
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -7,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 
 class NoteDetailsActivity : AppCompatActivity() {
@@ -17,10 +19,20 @@ class NoteDetailsActivity : AppCompatActivity() {
     private lateinit var deleteNoteTextViewBtn: TextView
     private var docId: String? = null
     private var isEditMode: Boolean = false
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_details)
+
+        auth = FirebaseAuth.getInstance()
+
+        // Check if user is logged in
+        if (auth.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
 
         titleEditText = findViewById(R.id.notes_title_text)
         contentEditText = findViewById(R.id.notes_content_text)
@@ -36,6 +48,8 @@ class NoteDetailsActivity : AppCompatActivity() {
         if (isEditMode) {
             pageTitleTextView.text = "Edit your note"
             deleteNoteTextViewBtn.visibility = View.VISIBLE
+        } else {
+            deleteNoteTextViewBtn.visibility = View.GONE
         }
 
         saveNoteBtn.setOnClickListener { saveNote() }
@@ -51,12 +65,12 @@ class NoteDetailsActivity : AppCompatActivity() {
             return
         }
 
-        val note = Note(noteTitle, noteContent, Timestamp.now()) // Fixed here
+        val note = Note(noteTitle, noteContent, Timestamp.now())
         saveNoteToFirebase(note)
     }
 
     private fun saveNoteToFirebase(note: Note) {
-        val documentReference: DocumentReference = if (isEditMode) {
+        val documentReference: DocumentReference = if (isEditMode && docId != null) {
             Utility.collectionReferenceForNotes.document(docId!!)
         } else {
             Utility.collectionReferenceForNotes.document()
@@ -67,20 +81,24 @@ class NoteDetailsActivity : AppCompatActivity() {
                 Utility.showToast(this, "Note saved successfully")
                 finish()
             }
-            .addOnFailureListener {
-                Utility.showToast(this, "Failed to save note")
+            .addOnFailureListener { e ->
+                Utility.showToast(this, "Failed to save note: ${e.message}")
             }
     }
 
     private fun deleteNoteFromFirebase() {
+        if (docId == null) {
+            Utility.showToast(this, "Cannot delete: Note ID is missing")
+            return
+        }
         Utility.collectionReferenceForNotes.document(docId!!)
             .delete()
             .addOnSuccessListener {
                 Utility.showToast(this, "Note deleted successfully")
                 finish()
             }
-            .addOnFailureListener {
-                Utility.showToast(this, "Failed to delete note")
+            .addOnFailureListener { e ->
+                Utility.showToast(this, "Failed to delete note: ${e.message}")
             }
     }
 }

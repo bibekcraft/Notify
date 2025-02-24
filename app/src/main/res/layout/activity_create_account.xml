@@ -1,173 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    android:paddingHorizontal="32dp"
-    android:paddingVertical="16dp"
-    tools:context=".CreateAccountActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
 
-    <!-- Icon -->
-    <ImageView
-        android:id="@+id/sign_up_icon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/sign_up"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp"
-        android:contentDescription="Sign Up Icon" />
-
-    <!-- Greeting Text -->
-
-    <TextView
-        android:id="@+id/hello_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Hello."
-        android:textColor="#212121"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_icon" />
-
-    <TextView
-        android:id="@+id/start_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Let’s Get Started"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="#212121"
-        app:layout_constraintTop_toBottomOf="@id/hello_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <!-- Form -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/start_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        app:boxStrokeColor="#6200EA"
-        app:hintTextColor="#6200EA"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email ID"
-            android:inputType="textEmailAddress"
-            android:textSize="18sp"
-            android:padding="16dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/email_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:passwordToggleEnabled="true"
-        app:boxStrokeColor="#6200EA"
-        app:hintTextColor="#6200EA"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textSize="18sp"
-            android:padding="16dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/confirm_password_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/password_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:passwordToggleEnabled="true"
-        app:boxStrokeColor="#6200EA"
-        app:hintTextColor="#6200EA"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/create_account_btn"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="Create Account"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/confirm_password_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        app:cornerRadius="8dp"
-        android:backgroundTint="#6200EA"
-        app:elevation="4dp" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/create_account_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
-
-    <!-- Footer -->
-    <TextView
-        android:id="@+id/footer_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already have an account? "
-        android:textSize="14sp"
-        android:textColor="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
-
-    <TextView
-        android:id="@+id/login_text_view_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#6200EA"
-        app:layout_constraintBaseline_toBaselineOf="@id/footer_text"
-        app:layout_constraintStart_toEndOf="@id/footer_text" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/confirm_password_edit_text"
+    <EditText
+        android:id="@+id/email_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:padding="16dp"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="269dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
