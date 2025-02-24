@@ -1,4 +1,3 @@
-// NoteDetailsActivity.kt
 package com.example.notes
 
 import android.os.Bundle
@@ -52,7 +51,7 @@ class NoteDetailsActivity : AppCompatActivity() {
             return
         }
 
-        val note = Note(noteTitle, noteContent, Timestamp.now().toString())
+        val note = Note(noteTitle, noteContent, Timestamp.now()) // Fixed here
         saveNoteToFirebase(note)
     }
 

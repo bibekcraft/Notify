@@ -1,14 +1,9 @@
 package com.example.notes
 
-import java.security.Timestamp
+import com.google.firebase.Timestamp
 
 data class Note(
-    var id: String = "",
     val title: String = "",
-    val content: String = ""
-) {
-    val timestamp: Timestamp?
-        get() {
-            TODO()
-        }
-}
+    val content: String = "",
+    val timestamp: Timestamp? = null
+)
